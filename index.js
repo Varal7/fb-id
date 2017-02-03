@@ -1,9 +1,11 @@
 var express = require('express');
 var Facebook = require('./lib/fb-id');
+var cors = require('cors')
 
 var app = express();
 var facebook = new Facebook();
 
+app.use(cors());
 
 app.get('/', function (req, res) {
    var url = req.query.url;
