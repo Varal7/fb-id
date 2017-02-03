@@ -3,8 +3,8 @@
 var searchInput = $('#search-input');
 var resultsDiv = $('#results');
 var form = $('#form');
-//var apiUrl = 'http://api.fbid.varal7.fr/';
-var apiUrl = 'http://localhost:8001/';
+var apiUrl = 'https://api.fbid.varal7.fr/';
+//var apiUrl = 'http://localhost:8001/';
 resultsDiv.hide();
 
 form.on('submit', function() {
