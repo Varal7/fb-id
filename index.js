@@ -2,12 +2,16 @@ var express = require('express');
 var Facebook = require('./lib/fb-id');
 var cors = require('cors')
 
-var app = express();
+var appApi = express();
+var appFrontend = express();
 var facebook = new Facebook();
 
-app.use(cors());
+var portApi = 8001;
+var portFrontend = 8002;
 
-app.get('/', function (req, res) {
+appApi.use(cors());
+
+appApi.get('/', function (req, res) {
    var url = req.query.url;
    facebook.getId(url, function(id) {
     res.setHeader('Content-Type', 'application/json');
@@ -20,10 +24,12 @@ app.get('/', function (req, res) {
    });
 })
 
-var server = app.listen(8001, '127.0.0.1' , function () {
-//var server = app.listen(8001, function () {
-   var host = server.address().address
-   var port = server.address().port
+appFrontend.use(express.static('frontend'));
 
-   console.log("App listening at http://%s:%s", host, port)
-})
+appApi.listen(portApi, function () {
+  console.log('API listening on port ' + portApi);
+});
+
+appFrontend.listen(portFrontend, function () {
+  console.log('Frontend listening on port ' + portFrontend);
+});

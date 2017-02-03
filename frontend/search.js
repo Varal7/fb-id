@@ -16,8 +16,13 @@ form.on('submit', function() {
 function displayId(url) {
   console.log("Search fb id for", url);
   $.getJSON(apiUrl + '?url=' + url, function (data) {
-    var html=data;
+    var html="<h2>Found it!</h2>";
+    html += "<code>" + data.id + "</code>";
     resultsDiv.html(html);
-    lyricsDiv.show();
+    resultsDiv.show();
+  }).fail(function( jqxhr, textStatus, error ) {
+    var html="<h2>Sorry, no results found</h2>";
+    resultsDiv.html(html);
+    resultsDiv.show();
   });
 }
