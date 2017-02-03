@@ -2,10 +2,12 @@
 
 var searchInput = $('#search-input');
 var resultsDiv = $('#results');
+var linksDiv = $('#links');
 var form = $('#form');
 var apiUrl = 'https://api.fbid.varal7.fr/';
 //var apiUrl = 'http://localhost:8001/';
 resultsDiv.hide();
+linksDiv.hide();
 
 form.on('submit', function() {
     var url = searchInput.val();
@@ -23,6 +25,10 @@ function displayId(url) {
     html += "<br/>";
     html += "<h1><code>" + data.id + "</code></h1>";
     resultsDiv.html(html);
+    var links = "<p>Related links:</p>";
+    links += '<p><a href="https://www.facebook.com/search/' + data.id + '/photos-of" title="Photos for this person">Photos for this profile</p> ';
+    linksDiv.html(links);
+    linksDiv.show();
   }).fail(function( jqxhr, textStatus, error ) {
     var html="<h2>Sorry, no results found</h2>";
     resultsDiv.html(html);
