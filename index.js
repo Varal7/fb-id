@@ -13,7 +13,8 @@ appApi.use(cors());
 
 appApi.get('/', function (req, res) {
    var url = req.query.url;
-   facebook.getId(url, function(id) {
+   var cleanUrl = "https://www.facebook.com/" + url.split("facebook.com/")[1]
+   facebook.getId(cleanUrl, function(id) {
     res.setHeader('Content-Type', 'application/json');
     if (id == 0) {
     res.status(400);
